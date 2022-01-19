@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {InputTextModule} from "primeng/inputtext";
+import {ButtonModule} from "primeng/button";
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import {InputTextModule} from "primeng/inputtext";
   ],
     imports: [
         BrowserModule,
-        InputTextModule
+        InputTextModule,
+        ButtonModule
     ],
   providers: [],
   bootstrap: [AppComponent]
