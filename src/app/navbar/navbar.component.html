@@ -3,11 +3,25 @@
         <div class="p-grid">
             <div class="p-col-12">
                 <a href="javascript:;"
-                   class="navbar-toggle">
+                   class="navbar-toggle"
+                    (click)="exibindoMenu = !exibindoMenu">
                     <i class="pi pi-bars"></i>
                 </a>
             </div>
         </div>
     </div>
+
+    <ul class="navbar-menu" [hidden]="!exibindoMenu">
+        <li class="navbar-usuario">Fernando Alencar</li>
+        <li class="navbar-menuitem">
+            <a href="#">Lançamentos</a>
+        </li>
+        <li class="navbar-menuitem">
+            <a href="#">Pessoas</a>
+        </li>
+        <li class="navbar-menuitem">
+            <a href="#">Logout</a>
+        </li>
+    </ul>
 
 </nav>
