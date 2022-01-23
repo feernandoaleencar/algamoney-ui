@@ -33,13 +33,12 @@
                        name="descricao" ngModel #descricao="ngModel"
                        required minlength="5">
 
-                <p-message *ngIf="descricao.hasError('required') && descricao.dirty" severity="error"
-                           text="Informe uma descrição">
-                </p-message>
-
-                <p-message *ngIf="descricao.hasError('minlength') && descricao.dirty" severity="error"
-                           text="Mínimo de {{ descricao.errors?.['minlength'].requiredLength }} caracteres.">
-                </p-message>
+                <app-message [control]="descricao" error="required"
+                             text="Informe uma descrição">
+                </app-message>
+                <app-message [control]="descricao" error="minlength"
+                             text="Mínimo de {{ descricao.errors?.['minlength']?.requiredLength }} caracteres.">
+                </app-message>
 
             </div>
 
