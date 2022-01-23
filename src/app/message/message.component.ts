@@ -1,13 +1,16 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-  selector: 'app-message',
+    selector: 'app-message',
     template: `
         <p-message *ngIf="temErro()" severity="error"
                    text="{{ text }}">
         </p-message>
     `,
-    styles: []
+    styles: [
+        `
+        `
+    ]
 })
 export class MessageComponent {
 
