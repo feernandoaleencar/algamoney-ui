@@ -1,0 +1,12 @@
+.p-button {
+    margin-right: .25em
+}
+
+a:link {
+    color: #3c93e7;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
