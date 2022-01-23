@@ -27,7 +27,7 @@
             </div>
 
             <div class="p-fluid p-col-12 p-md-9">
-                <label>Descrição {{ descricao.errors | json }}</label>
+                <label>Descrição</label>
                 <input pInputText
                        type="text"
                        name="descricao" ngModel #descricao="ngModel"
@@ -38,8 +38,7 @@
                 </p-message>
 
                 <p-message *ngIf="descricao.hasError('minlength') && descricao.dirty" severity="error"
-                           text="Mínimo de {{ descricao.errors?.['minlength'].requiredLength }} caracteres.
-                           Você digitou apenas {{ descricao.errors?.['minlength'].actualLength }}">
+                           text="Mínimo de {{ descricao.errors?.['minlength'].requiredLength }} caracteres.>
                 </p-message>
 
             </div>
