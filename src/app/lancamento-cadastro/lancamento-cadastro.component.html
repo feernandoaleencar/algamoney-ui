@@ -1,5 +1,5 @@
 <div class="container">
-    <form>
+    <form #lancamentoForm="ngForm" autocomplete="off">
 
         <div class="p-grid">
             <div class="p-col-12">
@@ -7,7 +7,7 @@
             </div>
 
             <div class="p-col-12">
-                <p-selectButton [options]="tipos" #tipo>
+                <p-selectButton [options]="tipos" #tipo name="tipo" ngModel>
                 </p-selectButton>
             </div>
 
@@ -16,8 +16,14 @@
                 <p-calendar dateFormat="dd/mm/yy"
                             [inline]="false"
                             [readonlyInput]="false"
-                            [showIcon]="false">
+                            [showIcon]="false"
+                            name="vencimento"
+                            ngModel #vencimento="ngModel"
+                            [required]="true">
                 </p-calendar>
+
+                <app-message [control]="vencimento" error="required"
+                             text="Informe uma data de vencimento"></app-message>
             </div>
 
             <div class="p-fluid p-col-6 p-md-3">
@@ -44,13 +50,25 @@
 
             <div class="p-fluid p-col-12 p-md-3">
                 <label>Valor</label>
-                <p-inputNumber mode="currency" currency="BRL" locale="pt-BR" placeholder="0,00"></p-inputNumber>
+                <p-inputNumber mode="currency"
+                               currency="BRL"
+                               locale="pt-BR"
+                               placeholder="R$ 0,00"
+                               name="valor"
+                               ngModel #valor="ngModel"
+                               [required]="true"></p-inputNumber>
+
+                <app-message [control]="valor" error="required"
+                             text="Informe uma valor"></app-message>
             </div>
 
             <div class="p-fluid p-col-12 p-md-6">
                 <label>Categoria</label>
                 <p-dropdown [options]="categorias"
-                            placeholder="Selecione uma categoria">
+                            placeholder="Selecione uma categoria"
+                            name="categoria"
+                            ngModel #categoria="ngModel"
+                            [required]="true">
                 </p-dropdown>
             </div>
 
@@ -58,7 +76,10 @@
                 <label>Pessoa</label>
                 <p-dropdown [options]="pessoas"
                             placeholder="Selecione uma pessoa"
-                            [filter]="true">
+                            [filter]="true"
+                            name="pessoa"
+                            ngModel #pessoa="ngModel"
+                            [required]="true">
                 </p-dropdown>
             </div>
 
@@ -68,7 +89,7 @@
             </div>
 
             <div class="p-col-12">
-                <button pButton type="submit" label="Salvar" disabled></button>
+                <button pButton type="submit" label="Salvar" [disabled]="lancamentoForm.invalid"></button>
                 <button pButton type="button" label="Novo" class="p-button-info"></button>
                 <a href="javascript:;">Voltar para a pesquisa</a>
             </div>
