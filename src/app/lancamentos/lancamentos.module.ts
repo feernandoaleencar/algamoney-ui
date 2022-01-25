@@ -1,7 +1,9 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CommonModule} from '@angular/common';
 import {FormsModule} from "@angular/forms";
+
+import {LancamentoCadastroComponent} from "./lancamento-cadastro/lancamento-cadastro.component";
+import {LancamentosPesquisaComponent} from "./lancamentos-pesquisa/lancamentos-pesquisa.component";
 
 import {InputTextModule} from "primeng/inputtext";
 import {ButtonModule} from "primeng/button";
@@ -15,27 +17,14 @@ import {InputNumberModule} from "primeng/inputnumber";
 import {InputMaskModule} from "primeng/inputmask";
 import {MessageModule} from "primeng/message";
 
-import {AppComponent} from './app.component';
-import {NavbarComponent} from './navbar/navbar.component';
-import {PessoasPesquisaComponent} from './pessoas-pesquisa/pessoas-pesquisa.component';
-import {PessoaCadastroComponent} from './pessoa-cadastro/pessoa-cadastro.component';
-import {MessageComponent} from './message/message.component';
-import {LancamentosModule} from "./lancamentos/lancamentos.module";
-
 @NgModule({
     declarations: [
-        AppComponent,
-        NavbarComponent,
-        PessoasPesquisaComponent,
-        PessoaCadastroComponent,
-        MessageComponent
+        LancamentoCadastroComponent,
+        LancamentosPesquisaComponent
     ],
     imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
+        CommonModule,
         FormsModule,
-
-        LancamentosModule,
 
         InputTextModule,
         ButtonModule,
@@ -49,8 +38,10 @@ import {LancamentosModule} from "./lancamentos/lancamentos.module";
         InputMaskModule,
         MessageModule
     ],
-    providers: [],
-    bootstrap: [AppComponent]
+    exports: [
+        LancamentoCadastroComponent,
+        LancamentosPesquisaComponent
+    ]
 })
-export class AppModule {
+export class LancamentosModule {
 }
