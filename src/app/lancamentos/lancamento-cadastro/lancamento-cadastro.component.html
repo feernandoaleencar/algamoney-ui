@@ -22,9 +22,8 @@
                             [required]="true">
                 </p-calendar>
 
-                <!--
                 <app-message [control]="vencimento" error="required"
-                             text="Informe uma data de vencimento"></app-message> -->
+                             text="Informe uma data de vencimento"></app-message>
             </div>
 
             <div class="p-fluid p-col-6 p-md-3">
@@ -40,14 +39,13 @@
                        name="descricao" ngModel #descricao="ngModel"
                        required minlength="5">
 
-                <!--
                 <app-message [control]="descricao" error="required"
                              text="Informe uma descrição">
                 </app-message>
                 <app-message [control]="descricao" error="minlength"
                              text="Mínimo de {{ descricao.errors?.['minlength']?.requiredLength }} caracteres.">
                 </app-message>
-                -->
+
             </div>
 
             <div class="p-fluid p-col-12 p-md-3">
@@ -60,9 +58,8 @@
                                ngModel #valor="ngModel"
                                [required]="true"></p-inputNumber>
 
-                <!--
                 <app-message [control]="valor" error="required"
-                             text="Informe uma valor"></app-message> -->
+                             text="Informe uma valor"></app-message>
             </div>
 
             <div class="p-fluid p-col-12 p-md-6">

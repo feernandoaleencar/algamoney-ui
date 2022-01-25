@@ -13,7 +13,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputMaskModule} from "primeng/inputmask";
 import {FormsModule} from "@angular/forms";
-import {MessageModule} from "primeng/message";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
@@ -35,6 +35,8 @@ import {MessageModule} from "primeng/message";
         DropdownModule,
         InputNumberModule,
         InputMaskModule,
+
+        SharedModule
     ],
     exports: [
         PessoaCadastroComponent,
