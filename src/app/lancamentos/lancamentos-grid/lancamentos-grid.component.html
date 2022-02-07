@@ -27,11 +27,11 @@
                     </td>
                     <td class="col-data">
                         <span class="p-column-title">Vencimento</span>
-                        {{ item.dataVencimento }}
+                        {{ item.dataVencimento | date:'dd/MM/yyyy' }}
                     </td>
                     <td class="col-data">
                         <span class="p-column-title">Pagamento</span>
-                        {{ item.dataPagamento }}
+                        {{ item.dataPagamento | date:'dd/MM/yyyy' }}
                     </td>
                     <td class="col-valor">
                         <span class="p-column-title">Valor</span>
