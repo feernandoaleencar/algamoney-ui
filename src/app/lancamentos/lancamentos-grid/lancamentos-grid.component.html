@@ -35,7 +35,7 @@
                     </td>
                     <td class="col-valor">
                         <span class="p-column-title">Valor</span>
-                        <span [style.color]="item.tipo === 'DESPESA' ? 'red' : 'blue'">{{ item.valor | number:'1.2-2' }}</span>
+                        <span [style.color]="item.tipo === 'DESPESA' ? 'red' : 'blue'">R$ {{ item.valor | number:'1.2-2' }}</span>
                     </td>
                     <td class="col-acoes">
                         <a pButton icon="pi pi-pencil"
@@ -45,7 +45,13 @@
                                 pTooltip="Excluir"
                                 tooltipPosition="top"></button>
                     </td>
-
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+                <tr>
+                    <td colspan="6">
+                        Nenhum lançamento encontrado
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
