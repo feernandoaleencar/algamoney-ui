@@ -35,7 +35,7 @@
                     </td>
                     <td class="col-valor">
                         <span class="p-column-title">Valor</span>
-                        <span [style.color]="item.tipo === 'DESPESA' ? 'red' : 'blue'">{{ item.valor }}</span>
+                        <span [style.color]="item.tipo === 'DESPESA' ? 'red' : 'blue'">{{ item.valor | number:'1.2-2' }}</span>
                     </td>
                     <td class="col-acoes">
                         <a pButton icon="pi pi-pencil"
