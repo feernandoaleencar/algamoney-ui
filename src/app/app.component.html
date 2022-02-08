@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
 <p-toast></p-toast>
 
-<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao>
+<p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao
+                 [style]="{width: '30vw'}">
     <p-footer>
         <button type="button" pButton icon="pi pi-times" label="Não"
                 (click)="confirmacao.reject()"></button>

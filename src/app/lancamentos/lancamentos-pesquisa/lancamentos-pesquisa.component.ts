@@ -45,7 +45,7 @@ export class LancamentosPesquisaComponent implements OnInit {
 
     excluir(lancamento: any) {
         this.confirmationService.confirm({
-            message: 'Tem certeza que deseja excluir?',
+            message: 'Deseja excluir este registro?',
             accept: () => {
                 this.lancamentoService.excluir(lancamento.id)
                     .then(() => {
