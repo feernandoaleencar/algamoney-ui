@@ -9,7 +9,8 @@ import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
 import {LancamentoService} from "./lancamentos/lancamento.service";
 import {ToastModule} from "primeng/toast";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
     declarations: [
@@ -24,11 +25,13 @@ import {MessageService} from "primeng/api";
 
         CoreModule,
         HttpClientModule,
-        ToastModule
+        ToastModule,
+        ConfirmDialogModule
     ],
     providers: [
         LancamentoService,
-        MessageService
+        MessageService,
+        ConfirmationService
     ],
     bootstrap: [AppComponent]
 })
