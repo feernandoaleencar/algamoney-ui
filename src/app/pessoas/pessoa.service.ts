@@ -4,7 +4,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 export class PessoaFiltro {
     nome?: string;
     pagina = 0;
-    itensPorPagina = 3;
+    itensPorPagina = 5;
 }
 
 @Injectable({
@@ -51,5 +51,12 @@ export class PessoaService {
         return this.http.get(this.pessoaUrl, { headers })
             .toPromise()
             .then((response : any) => response['content'])
+    }
+
+    excluir(id: number): Promise<void> {
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+        return this.http.delete<void>(`${this.pessoaUrl}/${id}`, { headers })
+            .toPromise();
     }
 }

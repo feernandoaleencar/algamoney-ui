@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {PessoaFiltro, PessoaService} from "../pessoa.service";
-import {LazyLoadEvent} from "primeng/api";
+import {ConfirmationService, LazyLoadEvent, MessageService} from "primeng/api";
+import {Table} from "primeng/table";
+import {ErrorHandlerService} from "../../core/error-handler.service";
 
 @Component({
     selector: 'app-pessoas-pesquisa',
@@ -15,15 +17,20 @@ export class PessoasPesquisaComponent implements OnInit {
 
     totalRegistros = 0;
 
+    @ViewChild('tabela') grid!: Table;
+
     constructor(
-        private pessoaService: PessoaService
+        private pessoaService: PessoaService,
+        private confirmationService: ConfirmationService,
+        private messageService: MessageService,
+        private errorHandlerService: ErrorHandlerService
     ) {
     }
 
     ngOnInit(): void {
     }
 
-    pesquisar(pagina = 0){
+    pesquisar(pagina = 0) {
         this.filtro.pagina = pagina;
 
         this.pessoaService.pesquisar(this.filtro)
@@ -37,5 +44,19 @@ export class PessoasPesquisaComponent implements OnInit {
     aoMudarPagina(event: LazyLoadEvent) {
         const pagina = event!.first! / event!.rows!
         this.pesquisar(pagina);
+    }
+
+    excluir(pessoa: any) {
+        this.confirmationService.confirm({
+            message: 'Deseja excluir este registro?',
+            accept: () => {
+                this.pessoaService.excluir(pessoa.id)
+                    .then(() => {
+                        this.grid.reset();
+                        this.messageService.add({severity: 'success', detail: 'Pessoa excluída com sucesso!'})
+                    })
+                    .catch(erro => this.errorHandlerService.handle(erro));
+            }
+        });
     }
 }
