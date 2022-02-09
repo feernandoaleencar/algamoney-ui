@@ -59,4 +59,18 @@ export class PessoasPesquisaComponent implements OnInit {
             }
         });
     }
+
+    ativarOuInativar(pessoa: any) {
+        const novoStatus = !pessoa.ativo;
+
+        this.pessoaService.mudarStatus(pessoa.id, novoStatus)
+            .then(() => {
+                const acao = novoStatus ? 'ativada' : 'desativada';
+
+                pessoa.ativo = novoStatus;
+
+                this.messageService.add({ severity: 'success', detail: `Pessoa ${acao} com sucesso!`})
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
 }

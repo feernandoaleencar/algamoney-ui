@@ -59,7 +59,8 @@
                             <span class="p-column-title">Status</span>
                             <a href="javascript:;"
                                [pTooltip]="item.ativo ? 'Desativar' : 'Ativar'"
-                               tooltipPosition="top">
+                               tooltipPosition="top"
+                               (click)="ativarOuInativar(item)">
                                 {{ item.ativo ? 'Ativo' : 'Inativo' }}
                             </a>
                         </td>

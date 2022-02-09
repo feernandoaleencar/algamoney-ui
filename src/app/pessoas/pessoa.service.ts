@@ -16,9 +16,10 @@ export class PessoaService {
 
     constructor(
         private http: HttpClient,
-    ) { }
+    ) {
+    }
 
-    pesquisar(filtro: PessoaFiltro): Promise<any>{
+    pesquisar(filtro: PessoaFiltro): Promise<any> {
 
         const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
@@ -30,9 +31,9 @@ export class PessoaService {
             params = params.set('nome', filtro.nome);
         }
 
-        return this.http.get(`${this.pessoaUrl}`, { headers, params })
+        return this.http.get(`${this.pessoaUrl}`, {headers, params})
             .toPromise()
-            .then((response : any) => {
+            .then((response: any) => {
                 const pessoas = response['content'];
 
                 const resultado = {
@@ -45,18 +46,26 @@ export class PessoaService {
 
     }
 
-    listarTodos(): Promise<any>  {
+    listarTodos(): Promise<any> {
         const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-        return this.http.get(this.pessoaUrl, { headers })
+        return this.http.get(this.pessoaUrl, {headers})
             .toPromise()
-            .then((response : any) => response['content'])
+            .then((response: any) => response['content'])
     }
 
     excluir(id: number): Promise<void> {
         const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-        return this.http.delete<void>(`${this.pessoaUrl}/${id}`, { headers })
+        return this.http.delete<void>(`${this.pessoaUrl}/${id}`, {headers})
             .toPromise();
+    }
+
+    mudarStatus(id: number, ativo: boolean): Promise<any> {
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+
+        return this.http.put<void>(`${this.pessoaUrl}/${id}/ativo`, ativo,  {headers})
+            .toPromise();
+
     }
 }
