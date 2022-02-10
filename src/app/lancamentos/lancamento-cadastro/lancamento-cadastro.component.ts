@@ -4,6 +4,11 @@ import {ErrorHandlerService} from "../../core/error-handler.service";
 import {PessoaService} from "../../pessoas/pessoa.service";
 import {NgForm} from "@angular/forms";
 import {Lancamento} from "../../core/model";
+import {MessageService} from "primeng/api";
+import {LancamentoService} from "../lancamento.service";
+
+import 'moment/moment'
+import * as moment from "moment";
 
 @Component({
     selector: 'app-lancamento-cadastro',
@@ -23,10 +28,14 @@ export class LancamentoCadastroComponent implements OnInit {
 
     pessoas: any = [];
 
-    constructor(
+    data?: Date;
+
+        constructor(
         private categoriaService: CategoriaService,
         private errorHandlerService: ErrorHandlerService,
-        private pessoaService: PessoaService
+        private pessoaService: PessoaService,
+        private messageService: MessageService,
+        private lancamentoService: LancamentoService
     ) {
     }
 
@@ -34,8 +43,6 @@ export class LancamentoCadastroComponent implements OnInit {
         this.carregarCategorias();
         this.carregarPessoas();
     }
-
-
 
     carregarCategorias() {
         return this.categoriaService.listarCategorias()
@@ -54,6 +61,15 @@ export class LancamentoCadastroComponent implements OnInit {
     }
 
     salvar(lancamentoForm: NgForm){
-        console.log(this.lancamento);
+        this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
+        this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
+
+        this.lancamentoService.Adicionar(this.lancamento)
+            .then(() => {
+                this.messageService.add({severity: 'success', detail: 'Lançamento adicionado com sucesso!'});
+                lancamentoForm.reset();
+                this.lancamento = new Lancamento();
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
     }
 }
