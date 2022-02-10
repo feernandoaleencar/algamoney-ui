@@ -1,5 +1,6 @@
 <app-navbar></app-navbar>
 <p-toast></p-toast>
+<router-outlet></router-outlet>
 
 <p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao
                  [style]="{width: '30vw'}">
@@ -10,12 +11,3 @@
                 (click)="confirmacao.accept()"></button>
     </p-footer>
 </p-confirmDialog>
-
-<app-pessoa-cadastro></app-pessoa-cadastro>
-
-<!--
-<app-lancamento-cadastro></app-lancamento-cadastro>
-<app-lancamentos-pesquisa></app-lancamentos-pesquisa>
-
-<app-pessoas-pesquisa></app-pessoas-pesquisa>
--->
