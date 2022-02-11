@@ -12,6 +12,7 @@ import {LancamentoService} from "../lancamentos/lancamento.service";
 import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {RouterModule} from "@angular/router";
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -24,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         NavbarComponent],
     imports: [
         CommonModule,
+        RouterModule,
 
         ToastModule,
         ConfirmDialogModule,
