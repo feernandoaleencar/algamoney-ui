@@ -74,7 +74,8 @@
                         <td class="col-acoes">
                             <a pButton icon="pi pi-pencil"
                                pTooltip="Editar"
-                               tooltipPosition="top"></a>
+                               tooltipPosition="top"
+                            [routerLink]="['/lancamentos', item.id]"></a>
                             <button pButton icon="pi pi-trash"
                                     pTooltip="Excluir"
                                     tooltipPosition="top"

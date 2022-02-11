@@ -9,6 +9,7 @@ import {LancamentoService} from "../lancamento.service";
 
 import 'moment/moment'
 import * as moment from "moment";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'app-lancamento-cadastro',
@@ -35,11 +36,13 @@ export class LancamentoCadastroComponent implements OnInit {
         private errorHandlerService: ErrorHandlerService,
         private pessoaService: PessoaService,
         private messageService: MessageService,
-        private lancamentoService: LancamentoService
+        private lancamentoService: LancamentoService,
+        private route: ActivatedRoute
     ) {
     }
 
     ngOnInit(): void {
+            console.log(this.route.snapshot.params['id'])
         this.carregarCategorias();
         this.carregarPessoas();
     }
