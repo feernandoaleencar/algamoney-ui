@@ -76,4 +76,12 @@ export class LancamentoService {
             .toPromise();
     }
 
+    atualizar(lancamento: Lancamento): Promise<Lancamento> {
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+        // @ts-ignore
+        return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.id}`, lancamento, { headers })
+            .toPromise();
+    }
+
 }
