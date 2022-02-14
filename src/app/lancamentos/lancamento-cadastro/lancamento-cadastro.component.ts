@@ -68,7 +68,15 @@ export class LancamentoCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    salvar(lancamentoForm: NgForm) {
+    salvar(lancamentoForm: NgForm){
+        if (this.editando){
+            this.atualizarLancamento(lancamentoForm);
+        } else {
+            this.adicionarLancamento(lancamentoForm);
+        }
+    }
+
+    adicionarLancamento(lancamentoForm: NgForm) {
         this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
         this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
 
@@ -78,6 +86,18 @@ export class LancamentoCadastroComponent implements OnInit {
                 lancamentoForm.reset();
                 this.lancamento = new Lancamento();
             })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    atualizarLancamento(lancamentoForm: NgForm){
+        this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
+        this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
+
+        this.lancamentoService.atualizar(this.lancamento)
+            .then(lancamento => {
+                this.lancamento = lancamento;
+                this.messageService.add({severity: 'success', detail: 'Lancamento atualizado com sucesso!'});
+        })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
