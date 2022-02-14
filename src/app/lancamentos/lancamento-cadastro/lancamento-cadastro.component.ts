@@ -31,7 +31,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     data?: Date;
 
-        constructor(
+    constructor(
         private categoriaService: CategoriaService,
         private errorHandlerService: ErrorHandlerService,
         private pessoaService: PessoaService,
@@ -42,7 +42,12 @@ export class LancamentoCadastroComponent implements OnInit {
     }
 
     ngOnInit(): void {
-            console.log(this.route.snapshot.params['id'])
+        const idLancamento = this.route.snapshot.params['id'];
+
+        if (idLancamento){
+            this.editar(idLancamento);
+        }
+
         this.carregarCategorias();
         this.carregarPessoas();
     }
@@ -50,7 +55,7 @@ export class LancamentoCadastroComponent implements OnInit {
     carregarCategorias() {
         return this.categoriaService.listarCategorias()
             .then(categorias => {
-                this.categorias = categorias.map((c: any) => ({ label: c.nome, value: c.id }))
+                this.categorias = categorias.map((c: any) => ({label: c.nome, value: c.id}))
             })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
@@ -63,7 +68,7 @@ export class LancamentoCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    salvar(lancamentoForm: NgForm){
+    salvar(lancamentoForm: NgForm) {
         this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
         this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
 
@@ -74,5 +79,17 @@ export class LancamentoCadastroComponent implements OnInit {
                 this.lancamento = new Lancamento();
             })
             .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    editar(id: number) {
+        this.lancamentoService.buscarPorCodigo(id)
+            .then(lancamento => {
+                this.lancamento = lancamento;
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    get editando(){
+        return Boolean(this.lancamento.id);
     }
 }
