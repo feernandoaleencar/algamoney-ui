@@ -14,7 +14,7 @@
 
             <div class="p-fluid p-col-6 p-md-3">
                 <label>Vencimento</label>
-                <p-calendar dateFormat="dd/mm/yy"
+                <p-calendar dateFormat="mm/dd/yy"
                             [inline]="false"
                             [readonlyInput]="false"
                             [showIcon]="false"
@@ -30,7 +30,7 @@
 
             <div class="p-fluid p-col-6 p-md-3">
                 <label>{{ tipo.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-                <p-calendar  dateFormat="dd/mm/yy" name="dataPagamento"
+                <p-calendar  dateFormat="mm/dd/yy" name="dataPagamento"
                             [(ngModel)]="lancamento.dataPagamento">
                 </p-calendar>
             </div>
