@@ -78,6 +78,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     adicionarLancamento(lancamentoForm: NgForm) {
         this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
+        if(this.lancamento.dataPagamento)
         this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
 
         this.lancamentoService.Adicionar(this.lancamento)
@@ -91,7 +92,8 @@ export class LancamentoCadastroComponent implements OnInit {
 
     atualizarLancamento(lancamentoForm: NgForm){
         this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
-        this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
+        if(this.lancamento.dataPagamento)
+            this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
 
         this.lancamentoService.atualizar(this.lancamento)
             .then(lancamento => {
@@ -102,6 +104,9 @@ export class LancamentoCadastroComponent implements OnInit {
     }
 
     editar(id: number) {
+        this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
+        this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
+
         this.lancamentoService.buscarPorCodigo(id)
             .then(lancamento => {
                 this.lancamento = lancamento;
