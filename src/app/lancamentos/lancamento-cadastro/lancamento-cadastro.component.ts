@@ -118,4 +118,9 @@ export class LancamentoCadastroComponent implements OnInit {
         if(this.lancamento.dataPagamento)
             this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
     }
+
+    novo(lancamentoForm: NgForm) {
+        lancamentoForm.reset(new Lancamento);
+        this.router.navigate(['/lancamentos/novo'])
+    }
 }
