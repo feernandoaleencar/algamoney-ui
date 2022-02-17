@@ -91,21 +91,9 @@ export class LancamentoService {
         return this.http.get(`${this.lancamentosUrl}/${id}`, {headers})
             .toPromise()
             .then((response: any) => {
-                this.converterStringsParaDatas([response]);
+                const lancamento = response
 
-                return response;
+                return lancamento;
             });
-    }
-
-    private converterStringsParaDatas(lancamentos: any[]) {
-
-        for (const lancamento of lancamentos) {
-
-            lancamento.dataVencimento = new Date(lancamento.dataVencimento);
-
-            if (lancamento.dataPagamento) {
-                lancamento.dataPagamento = new Date(lancamento.dataPagamento);
-            }
-        }
     }
 }

@@ -9,7 +9,7 @@ import {LancamentoService} from "../lancamento.service";
 
 import 'moment/moment'
 import * as moment from "moment";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
     selector: 'app-lancamento-cadastro',
@@ -37,7 +37,8 @@ export class LancamentoCadastroComponent implements OnInit {
         private pessoaService: PessoaService,
         private messageService: MessageService,
         private lancamentoService: LancamentoService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router,
     ) {
     }
 
@@ -80,10 +81,11 @@ export class LancamentoCadastroComponent implements OnInit {
         this.converterDataLancamentos();
 
         this.lancamentoService.Adicionar(this.lancamento)
-            .then(() => {
+            .then(lancamento => {
                 this.messageService.add({severity: 'success', detail: 'Lançamento adicionado com sucesso!'});
-                lancamentoForm.reset();
-                this.lancamento = new Lancamento();
+               // lancamentoForm.reset();
+               // this.lancamento = new Lancamento();
+               this.router.navigate(['/lancamentos', lancamento.id])
             })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
