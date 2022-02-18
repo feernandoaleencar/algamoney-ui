@@ -10,6 +10,7 @@ import {LancamentoService} from "../lancamento.service";
 import 'moment/moment'
 import * as moment from "moment";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
     selector: 'app-lancamento-cadastro',
@@ -39,6 +40,7 @@ export class LancamentoCadastroComponent implements OnInit {
         private lancamentoService: LancamentoService,
         private route: ActivatedRoute,
         private router: Router,
+        private datePipe: DatePipe
     ) {
     }
 
@@ -78,7 +80,6 @@ export class LancamentoCadastroComponent implements OnInit {
     }
 
     adicionarLancamento(lancamentoForm: NgForm) {
-        this.converterDataLancamentos();
 
         this.lancamentoService.Adicionar(this.lancamento)
             .then(lancamento => {
@@ -91,7 +92,6 @@ export class LancamentoCadastroComponent implements OnInit {
     }
 
     atualizarLancamento(lancamentoForm: NgForm){
-        this.converterDataLancamentos();
 
         this.lancamentoService.atualizar(this.lancamento)
             .then(lancamento => {
@@ -111,12 +111,6 @@ export class LancamentoCadastroComponent implements OnInit {
 
     get editando(){
         return Boolean(this.lancamento.id);
-    }
-
-    converterDataLancamentos(){
-        this.lancamento.dataVencimento = moment(this.lancamento.dataVencimento).format('DD/MM/YYYY');
-        if(this.lancamento.dataPagamento)
-            this.lancamento.dataPagamento = moment(this.lancamento.dataPagamento).format('DD/MM/YYYY');
     }
 
     novo(lancamentoForm: NgForm) {

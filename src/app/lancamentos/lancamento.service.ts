@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {DatePipe} from '@angular/common';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Lancamento} from "../core/model";
+import * as moment from "moment";
 
 export class LancamentoFiltro {
     descricao?: string;
@@ -73,7 +74,8 @@ export class LancamentoService {
 
         // @ts-ignore
         return this.http.post<Lancamento>(this.lancamentosUrl, lancamento, {headers})
-            .toPromise();
+            .toPromise()
+
     }
 
     atualizar(lancamento: Lancamento): Promise<Lancamento> {
@@ -85,15 +87,26 @@ export class LancamentoService {
     }
 
     buscarPorCodigo(id: number): Promise<Lancamento> {
-        const headers = new HttpHeaders()
-            .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
         return this.http.get(`${this.lancamentosUrl}/${id}`, {headers})
             .toPromise()
             .then((response: any) => {
-                const lancamento = response
+                this.converterStringsParaDatas([response]);
 
-                return lancamento;
+                return response;
             });
+    }
+
+    private converterStringsParaDatas(lancamentos: any[]) {
+
+        for (const lancamento of lancamentos) {
+
+            lancamento.dataVencimento = new Date(lancamento.dataVencimento + 'T00:00');
+
+            if (lancamento.dataPagamento) {
+                lancamento.dataPagamento = new Date(lancamento.dataPagamento + 'T00:00');
+            }
+        }
     }
 }
