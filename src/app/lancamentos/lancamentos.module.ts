@@ -16,6 +16,7 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {RouterModule} from "@angular/router";
+import {LancamentosRoutingModule} from "./lancamentos-routing.module";
 
 @NgModule({
     declarations: [
@@ -25,7 +26,6 @@ import {RouterModule} from "@angular/router";
     imports: [
         CommonModule,
         FormsModule,
-        RouterModule,
 
         InputTextModule,
         ButtonModule,
@@ -38,6 +38,7 @@ import {RouterModule} from "@angular/router";
         InputNumberModule,
 
         SharedModule,
+        LancamentosRoutingModule
     ],
     exports: []
 })
