@@ -13,6 +13,7 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {RouterModule} from "@angular/router";
+import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -22,7 +23,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
 @NgModule({
     declarations: [
-        NavbarComponent],
+        NavbarComponent,
+        PaginaNaoEncontradaComponent],
     imports: [
         CommonModule,
         RouterModule,
