@@ -39,10 +39,7 @@ import {RouterModule} from "@angular/router";
 
         SharedModule,
     ],
-    exports: [
-        LancamentoCadastroComponent,
-        LancamentosPesquisaComponent
-    ]
+    exports: []
 })
 export class LancamentosModule {
 }

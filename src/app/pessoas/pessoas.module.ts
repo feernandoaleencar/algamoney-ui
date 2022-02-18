@@ -39,10 +39,7 @@ import {InputMaskModule} from "primeng/inputmask";
 
         SharedModule
     ],
-    exports: [
-        PessoaCadastroComponent,
-        PessoasPesquisaComponent
-    ]
+    exports: []
 })
 export class PessoasModule {
 }
