@@ -14,6 +14,7 @@ import {TranslateLoader, TranslateModule, TranslateService} from "@ngx-translate
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {RouterModule} from "@angular/router";
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import {Title} from "@angular/platform-browser";
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -56,6 +57,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         MessageService,
         ConfirmationService,
         TranslateService,
+        Title,
         {provide: LOCALE_ID, useValue: 'pt-BR' }
     ]
 })
