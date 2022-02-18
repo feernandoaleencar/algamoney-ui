@@ -4,6 +4,7 @@ import {NgForm} from "@angular/forms";
 import {PessoaService} from "../pessoa.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {MessageService} from "primeng/api";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-pessoa-cadastro',
@@ -17,10 +18,12 @@ export class PessoaCadastroComponent implements OnInit {
     constructor(
         private pessoaService: PessoaService,
         private errorHandlerService: ErrorHandlerService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private title: Title
     ) { }
 
     ngOnInit(): void {
+        this.title.setTitle('Nova Pessoa');
     }
 
     salvar(pessoaForm: NgForm){
