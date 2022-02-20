@@ -26,7 +26,15 @@ export class PessoaCadastroComponent implements OnInit {
         this.title.setTitle('Nova Pessoa');
     }
 
-    salvar(pessoaForm: NgForm){
+    salvar(lancamentoForm: NgForm){
+        if (this.editando){
+           // this.atualizarLancamento(lancamentoForm);
+        } else {
+            this.adicionarPessoa(lancamentoForm);
+        }
+    }
+
+    adicionarPessoa(pessoaForm: NgForm){
 
         this.pessoaService.adicionar(this.pessoa)
             .then(() => {
@@ -36,6 +44,23 @@ export class PessoaCadastroComponent implements OnInit {
                 this.pessoa = new Pessoa();
             })
             .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    editar(id: number) {
+        this.pessoaService.buscarPorCodigo(id)
+            .then(pessoa => {
+                this.pessoa = pessoa;
+                this.atualizarTitle();
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    get editando(){
+        return Boolean(this.pessoa.id);
+    }
+
+    atualizarTitle(){
+        this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`)
     }
 
 }
