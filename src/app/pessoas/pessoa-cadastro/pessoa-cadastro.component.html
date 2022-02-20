@@ -98,7 +98,10 @@
 
             <div class="p-col-12">
                 <button pButton type="submit" label="Salvar" [disabled]="pessoaForm.invalid"></button>
-                <button pButton type="button" label="Novo" class="p-button-info"></button>
+                <button pButton type="button"
+                        label="Novo"
+                        class="p-button-info"
+                        (click)="novo(pessoaForm)"></button>
                 <a routerLink="/pessoas">Voltar para a pesquisa</a>
             </div>
 
