@@ -82,7 +82,7 @@ export class PessoaService {
         const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
         // @ts-ignore
-        return this.http.put<Pessoa>(`${this.pessoaUrl}/${pessoa.id}`, lancamento, {headers})
+        return this.http.put<Pessoa>(`${this.pessoaUrl}/${pessoa.id}`, pessoa, {headers})
             .toPromise();
     }
 
