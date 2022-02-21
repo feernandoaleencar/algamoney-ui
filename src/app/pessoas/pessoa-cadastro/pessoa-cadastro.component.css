@@ -5,6 +5,7 @@
 a {
     position: fixed;
     margin-top: 13px;
+    color: #337ab7;
 }
 
 a:link {
