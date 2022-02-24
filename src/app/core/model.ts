@@ -30,3 +30,8 @@ export class Lancamento {
     pessoa = new Pessoa();
     categoria = new Categoria();
 }
+
+export class Seguranca {
+    email?: string;
+    senha?: string
+}
