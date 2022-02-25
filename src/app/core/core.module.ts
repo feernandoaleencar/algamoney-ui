@@ -15,6 +15,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {RouterModule} from "@angular/router";
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import {Title} from "@angular/platform-browser";
+import {PessoaService} from "../pessoas/pessoa.service";
+import {AuthService} from "../seguranca/auth.service";
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -53,6 +55,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 
         ErrorHandlerService,
         LancamentoService,
+        PessoaService,
+        AuthService,
 
         MessageService,
         ConfirmationService,
