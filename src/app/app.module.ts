@@ -10,6 +10,7 @@ import {LancamentosModule} from "./lancamentos/lancamentos.module";
 import {PessoasModule} from "./pessoas/pessoas.module";
 import {AppRoutingModule} from "./app-routing.module";
 import {SegurancaModule} from "./seguranca/seguranca.module";
+import {CategoriasModule} from "./categoria/categorias.module";
 
 @NgModule({
     declarations: [
@@ -21,6 +22,7 @@ import {SegurancaModule} from "./seguranca/seguranca.module";
 
         LancamentosModule,
         PessoasModule,
+        CategoriasModule,
         SegurancaModule,
 
         CoreModule,
