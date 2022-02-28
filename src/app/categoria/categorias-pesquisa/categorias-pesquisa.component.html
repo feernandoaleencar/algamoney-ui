@@ -1,1 +1,53 @@
-<p>categorias-pesquisa works!</p>
+<div class="container">
+    <div class="p-grid">
+
+        <div class="p-col-12">
+            <h1>Categorias</h1>
+        </div>
+
+        <div class="p-col-10" style="margin: auto">
+            <p-table [value]="categorias"
+                     styleClass="p-datatable-gridlines p-datatable-striped"
+                     responsiveLayout="stack"
+                     #tabela>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th col-acoes-header>Código</th>
+                        <th>Categoria</th>
+                        <th col-acoes-header>Ações</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item>
+                    <tr>
+                        <td class="col-acoes">
+                            <span class="p-column-title">Código</span>
+                            {{ item.id }}
+                        </td>
+                        <td>
+                            <span class="p-column-title">Categoria</span>
+                            {{ item.nome }}
+                        </td>
+                        <td class="col-acoes">
+                            <button pButton icon="pi pi-pencil"
+                                    pTooltip="Editar"
+                                    tooltipPosition="top"
+                                    [routerLink]="['/categorias', item.id]"></button>
+                            <button pButton icon="pi pi-trash"
+                                    pTooltip="Excluir"
+                                    tooltipPosition="top">
+                            </button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="3">
+                            Nenhuma categoria encontrado
+                        </td>
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+    </div>
+</div>
