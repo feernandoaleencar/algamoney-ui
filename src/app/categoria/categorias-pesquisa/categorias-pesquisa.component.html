@@ -1,11 +1,28 @@
 <div class="container">
+
+    <form autocomplete="off">
+        <div class="p-grid">
+
+            <div class="p-col-12">
+                <h1>Categorias</h1>
+            </div>
+
+            <div class="p-col-12 p-fluid">
+
+                <label>Categoria</label>
+                <input type="text" pInputText name="nome">
+            </div>
+
+            <div class="p-col-12">
+                <button pButton type="submit" label="Pesquisar"></button>
+            </div>
+
+        </div>
+    </form>
+
     <div class="p-grid">
 
-        <div class="p-col-12">
-            <h1>Categorias</h1>
-        </div>
-
-        <div class="p-col-10" style="margin: auto">
+        <div class="p-col-12" style="margin: auto">
             <p-table [value]="categorias"
                      styleClass="p-datatable-gridlines p-datatable-striped"
                      responsiveLayout="stack"
