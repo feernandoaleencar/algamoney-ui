@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {CategoriaService} from "../categoria.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-categorias-pesquisa',
@@ -7,33 +9,24 @@ import {Component, OnInit} from '@angular/core';
 })
 export class CategoriasPesquisaComponent implements OnInit {
 
-    categorias = [
-        {
-            "id": 1,
-            "nome": "Lazer"
-        },
-        {
-            "id": 2,
-            "nome": "Alimentação"
-        },
-        {
-            "id": 3,
-            "nome": "Supermercado"
-        },
-        {
-            "id": 4,
-            "nome": "Farmácia"
-        },
-        {
-            "id": 5,
-            "nome": "Outros"
-        }
-    ]
+    categorias = []
 
-    constructor() {
+    constructor(
+        private categoriaService: CategoriaService,
+        private title: Title
+    ) {
     }
 
     ngOnInit(): void {
+        this.title.setTitle('Pesquisa de Categorias');
+        this.listarCategorias();
+    }
+
+    listarCategorias(){
+        this.categoriaService.listarCategorias()
+            .then(resultado => {
+                this.categorias = resultado;
+            })
     }
 
 }
