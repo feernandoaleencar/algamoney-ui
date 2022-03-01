@@ -29,17 +29,12 @@
                      #tabela>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th col-acoes-header>Código</th>
                         <th>Categoria</th>
                         <th col-acoes-header>Ações</th>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-item>
                     <tr>
-                        <td class="col-acoes">
-                            <span class="p-column-title">Código</span>
-                            {{ item.id }}
-                        </td>
                         <td>
                             <span class="p-column-title">Categoria</span>
                             {{ item.nome }}
@@ -65,6 +60,13 @@
                 </ng-template>
 
             </p-table>
+        </div>
+    </div>
+
+    <div class="p-grid">
+        <div class="p-col-12">
+            <button pButton type="submit" label="Nova Categoria"
+                    routerLink="/categoria/nova"></button>
         </div>
     </div>
 </div>
