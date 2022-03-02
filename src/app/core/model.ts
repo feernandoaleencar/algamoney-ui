@@ -17,6 +17,7 @@ export class Endereco {
 
 export class Categoria {
     id?: number;
+    nome?: string;
 }
 
 export class Lancamento {
