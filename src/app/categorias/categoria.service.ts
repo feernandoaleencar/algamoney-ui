@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Categoria} from "../core/model";
 
 @Injectable({
     providedIn: 'root'
@@ -24,6 +25,14 @@ export class CategoriaService {
         const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
         return this.http.delete<void>(`${this.categoriaUrl}/${id}`, {headers})
+            .toPromise();
+    }
+
+    adicionar(categoria: Categoria): Promise<Categoria>{
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+
+        // @ts-ignore
+        return this.http.post<Categoria>(this.categoriaUrl, categoria, { headers })
             .toPromise();
     }
 
