@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoriaService} from "../../categoria/categoria.service";
+import {CategoriaService} from "../../categorias/categoria.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {PessoaService} from "../../pessoas/pessoa.service";
 import {NgForm} from "@angular/forms";
