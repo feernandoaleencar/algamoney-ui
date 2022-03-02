@@ -46,7 +46,8 @@
                                     [routerLink]="['/categorias', item.id]"></button>
                             <button pButton icon="pi pi-trash"
                                     pTooltip="Excluir"
-                                    tooltipPosition="top">
+                                    tooltipPosition="top"
+                                    (click)="excluir(item)">
                             </button>
                         </td>
                     </tr>
