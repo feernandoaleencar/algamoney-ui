@@ -19,4 +19,12 @@ export class CategoriaService {
             .toPromise();
     }
 
+
+    excluir(id: number): Promise<void> {
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+        return this.http.delete<void>(`${this.categoriaUrl}/${id}`, {headers})
+            .toPromise();
+    }
+
 }
