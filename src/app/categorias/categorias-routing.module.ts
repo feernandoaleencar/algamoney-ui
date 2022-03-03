@@ -6,6 +6,7 @@ import {CategoriaCadastroComponent} from "./categoria-cadastro/categoria-cadastr
 const routes: Routes = [
     {path: 'categorias', component: CategoriasPesquisaComponent},
     {path: 'categorias/nova', component: CategoriaCadastroComponent},
+    {path: 'categorias/:id', component: CategoriaCadastroComponent},
 ];
 
 @NgModule({
