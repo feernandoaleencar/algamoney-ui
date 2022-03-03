@@ -28,9 +28,22 @@ export class CategoriaCadastroComponent implements OnInit {
     ngOnInit(): void {
         this.title.setTitle('Nova Categoria');
 
+        const idCategoria = this.route.snapshot.params['id'];
+
+        if(idCategoria) {
+            this.editar(idCategoria);
+        }
     }
 
     salvar(categoriaForm: NgForm) {
+        if(this.editando){
+            this.atualizar(categoriaForm);
+        } else {
+            this.adicionar(categoriaForm);
+        }
+    }
+
+    adicionar(categoriaForm: NgForm) {
         this.categoriaService.adicionar(this.categoria)
             .then(categoria => {
                 this.messageService.add({severity: 'success', detail: 'Categoria adicionada com sucesso!'});
@@ -40,13 +53,39 @@ export class CategoriaCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
+    atualizar(categoriaForm: NgForm) {
+        this.categoriaService.atualizar(this.categoria)
+            .then(categoria => {
+                this.categoria = categoria;
+
+                this.messageService.add({severity: 'success', detail: 'Categoria atualizada com sucesso!'});
+
+                this.atualizarTitle();
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    editar(id: number) {
+        this.categoriaService.buscarPorCodigo(id)
+            .then(categoria => {
+                console.log("Aqui" + categoria)
+                this.categoria = categoria;
+                this.atualizarTitle();
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
     get editando() {
         return Boolean(this.categoria.id);
     }
 
     novo(categoriaForm: NgForm) {
-        categoriaForm.reset(new Categoria());
+        categoriaForm.reset(new Categoria);
         this.router.navigate(['/categorias/nova'])
+    }
+
+    atualizarTitle(){
+        this.title.setTitle(`Edição de categoria: ${this.categoria.nome}`)
     }
 
 }
