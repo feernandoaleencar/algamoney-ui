@@ -36,4 +36,23 @@ export class CategoriaService {
             .toPromise();
     }
 
+    atualizar(categoria: Categoria): Promise<Categoria> {
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
+
+        // @ts-ignore
+        return this.http.put<Categoria>(`${this.categoriaUrl}/${categoria.id}`, categoria, {headers})
+            .toPromise();
+    }
+
+    buscarPorCodigo(id: number): Promise<Categoria> {
+        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
+
+        return this.http.get(`${this.categoriaUrl}/${id}`, {headers})
+            .toPromise()
+            .then((response: any) => {
+                console.log(response)
+                return response
+            })
+    }
+
 }
