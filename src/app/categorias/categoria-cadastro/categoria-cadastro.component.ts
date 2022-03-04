@@ -68,7 +68,6 @@ export class CategoriaCadastroComponent implements OnInit {
     editar(id: number) {
         this.categoriaService.buscarPorCodigo(id)
             .then(categoria => {
-                console.log("Aqui" + categoria)
                 this.categoria = categoria;
                 this.atualizarTitle();
             })
