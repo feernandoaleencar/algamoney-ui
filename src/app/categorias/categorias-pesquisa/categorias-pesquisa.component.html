@@ -26,6 +26,8 @@
             <p-table [value]="categorias"
                      styleClass="p-datatable-gridlines p-datatable-striped"
                      responsiveLayout="stack"
+                     [paginator]="true"
+                     [rows]="5"
                      #tabela>
                 <ng-template pTemplate="header">
                     <tr>
