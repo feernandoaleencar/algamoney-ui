@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Seguranca} from "../core/model";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {JwtHelperService} from "@auth0/angular-jwt";
 
 @Injectable({
     providedIn: 'root'
@@ -8,10 +9,14 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 export class AuthService {
 
     oauthTokenUrl = 'http://localhost:8080/oauth/token';
+    jwtPayload: any;
 
     constructor(
         private http: HttpClient,
-    ) { }
+        private jwtHelper: JwtHelperService
+    ) {
+        this.carregartToken();
+    }
 
     login(usuario: Seguranca): Promise<void> {
         const headers = new HttpHeaders()
@@ -20,13 +25,28 @@ export class AuthService {
 
         const body = `username=${usuario.email}&password=${usuario.senha}&grant_type=password`;
 
-        return this.http.post(this.oauthTokenUrl, body, { headers })
+        return this.http.post<any>(this.oauthTokenUrl, body, { headers })
             .toPromise()
             .then(response => {
-                console.log(response)
+                console.log(response);
+                this.armazenarToken(response['access_token']);
             })
             .catch(response => {
                 console.log(response)
             });
+    }
+
+    private armazenarToken(token: string) {
+        this.jwtPayload = this.jwtHelper.decodeToken(token);
+
+        localStorage.setItem('token', token);
+    }
+
+    private carregartToken(){
+        const token = localStorage.getItem('token');
+
+        if (token){
+            this.armazenarToken(token);
+        }
     }
 }

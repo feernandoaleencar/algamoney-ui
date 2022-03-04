@@ -1,19 +1,30 @@
 import {NgModule} from '@angular/core';
-import {LoginFormComponent} from './login-form/login-form.component';
-import {SegurancaRoutingModule} from "./seguranca-routing.module";
-import {SharedModule} from "../shared/shared.module";
 
+import {JwtHelperService, JwtModule} from "@auth0/angular-jwt";
+
+import {SharedModule} from "../shared/shared.module";
+import {SegurancaRoutingModule} from "./seguranca-routing.module";
+import {LoginFormComponent} from './login-form/login-form.component';
 
 @NgModule({
-  declarations: [
-    LoginFormComponent
-  ],
+    declarations: [
+        LoginFormComponent
+    ],
     imports: [
         SharedModule,
         SegurancaRoutingModule,
 
-    ],
-  exports: []
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: () => {
+                    return '';
+                }
+            }
+        }),
 
+    ],
+    exports: [],
+    providers: [JwtHelperService]
 })
-export class SegurancaModule { }
+export class SegurancaModule {
+}
