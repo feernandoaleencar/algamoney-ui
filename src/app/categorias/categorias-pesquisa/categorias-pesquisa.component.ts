@@ -42,7 +42,7 @@ export class CategoriasPesquisaComponent implements OnInit {
             accept: () => {
                 this.categoriaService.excluir(categoria.id)
                     .then(() => {
-                        this.grid.reset();
+                        this.listarCategorias();
                         this.messageService.add({severity: 'success', detail: 'Categoria excluída com sucesso!'})
                     })
                     .catch(erro => this.errorHandlerService.handle(erro));
