@@ -50,7 +50,6 @@ export class CategoriaService {
         return this.http.get(`${this.categoriaUrl}/${id}`, {headers})
             .toPromise()
             .then((response: any) => {
-                console.log(response)
                 return response
             })
     }
