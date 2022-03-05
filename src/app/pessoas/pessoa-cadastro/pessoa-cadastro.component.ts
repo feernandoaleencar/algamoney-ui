@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Lancamento, Pessoa} from "../../core/model";
+import {Pessoa} from "../../core/model";
 import {NgForm} from "@angular/forms";
 import {PessoaService} from "../pessoa.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";

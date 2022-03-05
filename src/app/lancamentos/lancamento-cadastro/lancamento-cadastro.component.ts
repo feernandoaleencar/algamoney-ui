@@ -1,17 +1,15 @@
 import {Component, OnInit} from '@angular/core';
+import {NgForm} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Title} from "@angular/platform-browser";
+
 import {CategoriaService} from "../../categorias/categoria.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {PessoaService} from "../../pessoas/pessoa.service";
-import {NgForm} from "@angular/forms";
 import {Lancamento} from "../../core/model";
+
 import {MessageService} from "primeng/api";
 import {LancamentoService} from "../lancamento.service";
-
-import 'moment/moment'
-import * as moment from "moment";
-import {ActivatedRoute, Router} from "@angular/router";
-import {DatePipe} from "@angular/common";
-import {Title} from "@angular/platform-browser";
 
 @Component({
     selector: 'app-lancamento-cadastro',

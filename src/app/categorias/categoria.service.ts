@@ -14,40 +14,35 @@ export class CategoriaService {
     ) { }
 
     listarCategorias(): Promise<any> {
-        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-        return this.http.get(this.categoriaUrl, {headers})
+        return this.http.get(this.categoriaUrl)
             .toPromise();
     }
 
 
     excluir(id: number): Promise<void> {
-        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
-        return this.http.delete<void>(`${this.categoriaUrl}/${id}`, {headers})
+        return this.http.delete<void>(`${this.categoriaUrl}/${id}`)
             .toPromise();
     }
 
     adicionar(categoria: Categoria): Promise<Categoria>{
-        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
 
         // @ts-ignore
-        return this.http.post<Categoria>(this.categoriaUrl, categoria, { headers })
+        return this.http.post<Categoria>(this.categoriaUrl, categoria)
             .toPromise();
     }
 
     atualizar(categoria: Categoria): Promise<Categoria> {
-        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==');
 
         // @ts-ignore
-        return this.http.put<Categoria>(`${this.categoriaUrl}/${categoria.id}`, categoria, {headers})
+        return this.http.put<Categoria>(`${this.categoriaUrl}/${categoria.id}`, categoria)
             .toPromise();
     }
 
     buscarPorCodigo(id: number): Promise<Categoria> {
-        const headers = new HttpHeaders().append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
 
-        return this.http.get(`${this.categoriaUrl}/${id}`, {headers})
+        return this.http.get(`${this.categoriaUrl}/${id}`)
             .toPromise()
             .then((response: any) => {
                 return response
