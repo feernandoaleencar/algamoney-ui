@@ -68,14 +68,14 @@ export class PessoaService {
     adicionar(pessoa: Pessoa): Promise<Pessoa>{
 
         // @ts-ignore
-        return this.http.post<Pessoa>(this.pessoaUrl, pessoa, { headers })
+        return this.http.post<Pessoa>(this.pessoaUrl, pessoa)
             .toPromise();
     }
 
     atualizar(pessoa: Pessoa): Promise<Pessoa> {
 
         // @ts-ignore
-        return this.http.put<Pessoa>(`${this.pessoaUrl}/${pessoa.id}`, pessoa, {headers})
+        return this.http.put<Pessoa>(`${this.pessoaUrl}/${pessoa.id}`, pessoa)
             .toPromise();
     }
 
