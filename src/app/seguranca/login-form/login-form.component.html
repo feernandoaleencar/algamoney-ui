@@ -22,17 +22,15 @@
                        placeholder="Senha"
                        name="senha"
                        #senha="ngModel"
-                       [(ngModel)]="seguranca.senha" required minlength="5">
-
-                <app-message [control]="senha" error="required"
-                             text="Informe a senha"></app-message>
+                       #Senha
+                       [(ngModel)]="seguranca.senha" required>
             </div>
 
             <div class="p-fluid p-col-12">
                 <button pButton type="submit"
                         label="Entrar"
                         [disabled]="loginForm.invalid"
-                        (click)="login(seguranca)">
+                        (click)="login(seguranca); seguranca.senha =''; Senha.focus()">
                 </button>
 
             </div>
