@@ -19,4 +19,8 @@ export class NavbarComponent implements OnInit {
         this.usuarioLogado = this.authService.jwtPayload?.nome;
     }
 
+    temPermissao(permissao: string) {
+        return this.authService.temPermissao(permissao);
+    }
+
 }
