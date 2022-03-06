@@ -19,20 +19,18 @@ export class AuthService {
     }
 
     login(usuario: Seguranca): Promise<void> {
-        const headers = new HttpHeaders()
-            .append('Content-Type', 'application/x-www-form-urlencoded')
-            .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+        const headers = this.headers()
 
         const body = `username=${usuario.email}&password=${usuario.senha}&grant_type=password`;
 
-        return this.http.post<any>(this.oauthTokenUrl, body, { headers })
+        return this.http.post<any>(this.oauthTokenUrl, body, {headers, withCredentials: true})
             .toPromise()
             .then(response => {
                 this.armazenarToken(response['access_token']);
             })
             .catch(response => {
-                if (response.status === 400){
-                    if (response.error.error === 'invalid_grant'){
+                if (response.status === 400) {
+                    if (response.error.error === 'invalid_grant') {
                         return Promise.reject('Usuário ou senha inválida!')
                     }
                 }
@@ -47,15 +45,43 @@ export class AuthService {
         localStorage.setItem('token', token);
     }
 
-    private carregartToken(){
+    private carregartToken() {
         const token = localStorage.getItem('token');
 
-        if (token){
+        if (token) {
             this.armazenarToken(token);
         }
     }
 
     temPermissao(permissao: string) {
         return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+    }
+
+    obterNovoAccessToken(): Promise<any> {
+        const headers = this.headers();
+
+        const body = 'grant_type=refresh_token';
+        return this.http.post<any>(this.oauthTokenUrl, body, { headers, withCredentials: true })
+            .toPromise()
+            .then((response:any) => {
+                this.armazenarToken(response['access_token']);
+
+                console.log('Novo access token criado!');
+
+                return Promise.resolve();
+            })
+            .catch(response => {
+                console.error('Erro ao renovar token', response);
+
+                return Promise.resolve();
+            });
+    }
+
+    headers() {
+        const headers = new HttpHeaders()
+            .append('Content-Type', 'application/x-www-form-urlencoded')
+            .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==');
+
+        return headers;
     }
 }
