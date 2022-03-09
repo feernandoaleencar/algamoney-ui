@@ -4,6 +4,7 @@ import {ConfirmationService, LazyLoadEvent, MessageService} from "primeng/api";
 import {Table} from "primeng/table";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {Title} from "@angular/platform-browser";
+import {AuthService} from "../../seguranca/auth.service";
 
 @Component({
     selector: 'app-lancamentos-pesquisa',
@@ -25,7 +26,8 @@ export class LancamentosPesquisaComponent implements OnInit {
         private messageService: MessageService,
         private confirmationService: ConfirmationService,
         private errorHandlerService: ErrorHandlerService,
-        private title: Title
+        private title: Title,
+        private authService: AuthService
     ) {
     }
 
@@ -61,5 +63,9 @@ export class LancamentosPesquisaComponent implements OnInit {
                     .catch(erro => this.errorHandlerService.handle(erro));
             }
         });
+    }
+
+    temPermissao(permissao: string) {
+        return this.authService.temPermissao(permissao);
     }
 }
