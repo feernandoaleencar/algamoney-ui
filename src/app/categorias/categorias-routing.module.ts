@@ -6,19 +6,19 @@ import {AuthGuard} from "../seguranca/auth.guard";
 
 const routes: Routes = [
     {
-        path: 'categorias',
+        path: '',
         component: CategoriasPesquisaComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_PESQUISAR_CATEGORIA']}
     },
     {
-        path: 'categorias/nova',
+        path: 'nova',
         component: CategoriaCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_CADASTRAR_CATEGORIA']}
     },
     {
-        path: 'categorias/:id',
+        path: ':id',
         component: CategoriaCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: ['ROLE_CADASTRAR_CATEGORIA']}
