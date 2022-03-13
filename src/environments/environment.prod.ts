@@ -1,6 +1,6 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://localhost:8080',
+    apiUrl: 'https://algamoney-gen-api.herokuapp.com',
     tokenAllowedDomains: [ /algamoney-api.herokuapp.com/ ],
     tokenDisallowedRoutes: [/\/oauth\/token/],
 }
