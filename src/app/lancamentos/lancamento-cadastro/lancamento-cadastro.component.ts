@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 
@@ -23,13 +23,15 @@ export class LancamentoCadastroComponent implements OnInit {
         {label: 'Despesa', value: 'DESPESA'},
     ];
 
-    lancamento: Lancamento = new Lancamento();
+    //lancamento: Lancamento = new Lancamento();
 
     categorias: any = [];
 
     pessoas: any = [];
 
     data?: Date;
+
+    formulario!: FormGroup;
 
     constructor(
         private categoriaService: CategoriaService,
@@ -39,11 +41,13 @@ export class LancamentoCadastroComponent implements OnInit {
         private lancamentoService: LancamentoService,
         private route: ActivatedRoute,
         private router: Router,
-        private title: Title
+        private title: Title,
+        private formBuilder: FormBuilder
     ) {
     }
 
     ngOnInit(): void {
+        this.configurarFormulario();
         this.title.setTitle('Novo Lancamento')
         const idLancamento = this.route.snapshot.params['id'];
 
@@ -53,6 +57,26 @@ export class LancamentoCadastroComponent implements OnInit {
 
         this.carregarCategorias();
         this.carregarPessoas();
+    }
+
+    configurarFormulario(){
+        this.formulario = this.formBuilder.group({
+            id: [],
+            tipo: ['RECEITA', Validators.required],
+            dataVencimento: [null, Validators.required],
+            dataPagamento: [],
+            descricao: [null, [Validators.required, Validators.minLength(5)]],
+            valor: [null, Validators.required],
+            pessoa: this.formBuilder.group({
+               id: [null, Validators.required],
+               nome: []
+            }),
+            categoria: this.formBuilder.group({
+               id: [null, Validators.required],
+               nome: [null, Validators.required],
+            }),
+            observacao: []
+        });
     }
 
     carregarCategorias() {
@@ -71,17 +95,17 @@ export class LancamentoCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    salvar(lancamentoForm: NgForm){
+    salvar(){
         if (this.editando){
-            this.atualizarLancamento(lancamentoForm);
+            this.atualizarLancamento();
         } else {
-            this.adicionarLancamento(lancamentoForm);
+            this.adicionarLancamento();
         }
     }
 
-    adicionarLancamento(lancamentoForm: NgForm) {
+    adicionarLancamento() {
 
-        this.lancamentoService.Adicionar(this.lancamento)
+        this.lancamentoService.Adicionar(this.formulario.value)
             .then(lancamento => {
                 this.messageService.add({severity: 'success', detail: 'Lançamento adicionado com sucesso!'});
                // lancamentoForm.reset();
@@ -91,11 +115,12 @@ export class LancamentoCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    atualizarLancamento(lancamentoForm: NgForm){
+    atualizarLancamento(){
 
-        this.lancamentoService.atualizar(this.lancamento)
+        this.lancamentoService.atualizar(this.formulario.value)
             .then(lancamento => {
-                this.lancamento = lancamento;
+                //this.lancamento = lancamento;
+                this.formulario.setValue(lancamento);
                 this.messageService.add({severity: 'success', detail: 'Lancamento atualizado com sucesso!'});
                 this.atualizarTitle();
         })
@@ -105,22 +130,23 @@ export class LancamentoCadastroComponent implements OnInit {
     editar(id: number) {
         this.lancamentoService.buscarPorCodigo(id)
             .then(lancamento => {
-                this.lancamento = lancamento;
+                //this.lancamento = lancamento;
+                this.formulario.setValue(lancamento);
                 this.atualizarTitle();
             })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
     get editando(){
-        return Boolean(this.lancamento.id);
+        return Boolean(this.formulario.get('id'));
     }
 
-    novo(lancamentoForm: NgForm) {
-        lancamentoForm.reset(new Lancamento);
+    novo() {
+        this.formulario.reset(new Lancamento);
         this.router.navigate(['/lancamentos/novo'])
     }
 
     atualizarTitle(){
-        this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`)
+        this.title.setTitle(`Edição de lançamento: ${this.formulario.get('descricao')?.value}`)
     }
 }
