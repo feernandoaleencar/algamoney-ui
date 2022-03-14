@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from "@angular/forms";
+import {FormBuilder, FormGroup, NgForm, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Title} from "@angular/platform-browser";
 
@@ -31,6 +31,8 @@ export class LancamentoCadastroComponent implements OnInit {
 
     data?: Date;
 
+    formulario: FormGroup;
+
     constructor(
         private categoriaService: CategoriaService,
         private errorHandlerService: ErrorHandlerService,
@@ -39,11 +41,13 @@ export class LancamentoCadastroComponent implements OnInit {
         private lancamentoService: LancamentoService,
         private route: ActivatedRoute,
         private router: Router,
-        private title: Title
+        private title: Title,
+        private formBuilder: FormBuilder
     ) {
     }
 
     ngOnInit(): void {
+        this.configurarFormulario();
         this.title.setTitle('Novo Lancamento')
         const idLancamento = this.route.snapshot.params['id'];
 
@@ -53,6 +57,26 @@ export class LancamentoCadastroComponent implements OnInit {
 
         this.carregarCategorias();
         this.carregarPessoas();
+    }
+
+    configurarFormulario(){
+        this.formulario = this.formBuilder.group({
+            id: [],
+            tipo: ['RECEITA', Validators.required],
+            dataVencimento: [null, Validators.required],
+            dataPagamento: [],
+            descricao: [null, [Validators.required, Validators.minLength(5)]],
+            valor: [null, Validators.required],
+            pessoa: this.formBuilder.group({
+               id: [null, Validators.required],
+               nome: []
+            }),
+            categoria: this.formBuilder.group({
+               id: [null, Validators.required],
+               nome: [null, Validators.required],
+            }),
+            observacao: []
+        });
     }
 
     carregarCategorias() {

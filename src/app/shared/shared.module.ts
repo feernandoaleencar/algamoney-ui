@@ -13,7 +13,7 @@ import {SelectButtonModule} from "primeng/selectbutton";
 import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputMaskModule} from "primeng/inputmask";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     declarations: [
@@ -22,6 +22,7 @@ import {FormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
 
         MessageModule,
 
@@ -41,6 +42,7 @@ import {FormsModule} from "@angular/forms";
     exports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
 
         MessageComponent,
 
