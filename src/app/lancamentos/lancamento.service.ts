@@ -79,7 +79,12 @@ export class LancamentoService {
 
         // @ts-ignore
         return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.id}`, lancamento)
-            .toPromise();
+            .toPromise()
+            .then((response:any) => {
+                this.converterStringsParaDatas([response]);
+
+                return response;
+            });
     }
 
     buscarPorCodigo(id: number): Promise<Lancamento> {

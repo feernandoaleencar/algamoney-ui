@@ -69,11 +69,11 @@ export class LancamentoCadastroComponent implements OnInit {
             valor: [null, Validators.required],
             pessoa: this.formBuilder.group({
                id: [null, Validators.required],
-               nome: []
+               nome: [],
             }),
             categoria: this.formBuilder.group({
                id: [null, Validators.required],
-               nome: [null, Validators.required],
+               nome: [],
             }),
             observacao: []
         });
@@ -118,12 +118,11 @@ export class LancamentoCadastroComponent implements OnInit {
     atualizarLancamento(){
 
         this.lancamentoService.atualizar(this.formulario.value)
-            .then(lancamento => {
-                //this.lancamento = lancamento;
-                this.formulario.setValue(lancamento);
+            .then((lancamento:Lancamento) => {
+                this.formulario.patchValue(lancamento)
                 this.messageService.add({severity: 'success', detail: 'Lancamento atualizado com sucesso!'});
                 this.atualizarTitle();
-        })
+            })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
@@ -131,14 +130,14 @@ export class LancamentoCadastroComponent implements OnInit {
         this.lancamentoService.buscarPorCodigo(id)
             .then(lancamento => {
                 //this.lancamento = lancamento;
-                this.formulario.setValue(lancamento);
+                this.formulario.patchValue(lancamento);
                 this.atualizarTitle();
             })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
     get editando(){
-        return Boolean(this.formulario.get('id'));
+        return Boolean(this.formulario.get('id')!.value);
     }
 
     novo() {
