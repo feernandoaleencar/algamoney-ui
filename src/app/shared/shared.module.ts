@@ -14,6 +14,8 @@ import {DropdownModule} from "primeng/dropdown";
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputMaskModule} from "primeng/inputmask";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {PanelModule} from "primeng/panel";
+import {ChartModule} from "primeng/chart";
 
 @NgModule({
     declarations: [
@@ -37,7 +39,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         DropdownModule,
         InputNumberModule,
         InputMaskModule,
-
+        PanelModule,
+        ChartModule
     ],
     exports: [
         CommonModule,
@@ -57,6 +60,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         DropdownModule,
         InputNumberModule,
         InputMaskModule,
+        PanelModule,
+        ChartModule
     ]
 })
 export class SharedModule {

@@ -25,7 +25,7 @@ export class LoginFormComponent implements OnInit {
     login(usuario: Seguranca) {
         this.authService.login(usuario)
             .then(() => {
-                this.router.navigate(['/lancamentos']);
+                this.router.navigate(['/dashboard']);
             })
             .catch(erro =>{
                 this.errorHandlerService.handle(erro);
