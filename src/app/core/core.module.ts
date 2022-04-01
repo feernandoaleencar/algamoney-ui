@@ -18,6 +18,7 @@ import {Title} from "@angular/platform-browser";
 import {PessoaService} from "../pessoas/pessoa.service";
 import {AuthService} from "../seguranca/auth.service";
 import {NaoAutorizadoComponent} from "./nao-autorizado.component";
+import {DashboardService} from "../dashboard/dashboard.service";
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -58,6 +59,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         ErrorHandlerService,
         LancamentoService,
         PessoaService,
+        DashboardService,
+
         AuthService,
 
         MessageService,
