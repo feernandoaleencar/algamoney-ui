@@ -19,6 +19,7 @@ import {PessoaService} from "../pessoas/pessoa.service";
 import {AuthService} from "../seguranca/auth.service";
 import {NaoAutorizadoComponent} from "./nao-autorizado.component";
 import {DashboardService} from "../dashboard/dashboard.service";
+import {RelatoriosModule} from "../relatorios/relatorios.module";
 
 registerLocaleData(localePt, 'pt-BR')
 
@@ -60,6 +61,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         LancamentoService,
         PessoaService,
         DashboardService,
+        RelatoriosModule,
 
         AuthService,
 
