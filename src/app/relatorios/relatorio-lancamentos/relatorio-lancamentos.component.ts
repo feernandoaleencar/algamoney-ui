@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./relatorio-lancamentos.component.css']
 })
 export class RelatorioLancamentosComponent implements OnInit {
+    periodoInicio?: Date;
+    periodoFim?: Date;
 
-  constructor() { }
+    constructor() { }
 
   ngOnInit(): void {
+  }
+
+  gerar() {
+      console.log(this.periodoInicio);
+      console.log(this.periodoFim);
   }
 
 }
