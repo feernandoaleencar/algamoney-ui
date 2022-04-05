@@ -36,8 +36,12 @@ label {
     text-align: center;
 }
 
+.p-datatable .p-datatable-thead > tr > th {
+    text-align: center;
+}
+
 .col-acoes {
-    width: 120px;
+    width: 150px;
 }
 
 .col-acoes > a {
@@ -62,11 +66,11 @@ label {
     }
 
     .col-acoes-header {
-        width: 115px;
+        width: 125px;
     }
 
     .col-acoes {
-        width: 115px;
+        width: 125px;
         text-align: center !important;
     }
 
