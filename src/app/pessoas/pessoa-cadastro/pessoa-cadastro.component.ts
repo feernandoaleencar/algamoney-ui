@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Contato, Pessoa} from "../../core/model";
-import {NgForm} from "@angular/forms";
+import {FormControl, NgForm} from "@angular/forms";
 import {PessoaService} from "../pessoa.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
 import {MessageService} from "primeng/api";
@@ -94,4 +94,17 @@ export class PessoaCadastroComponent implements OnInit {
 
         this.contato = new Contato();
     }
+
+    confirmarContato(frm: NgForm) {
+        this.pessoa.contatos.push(this.clonarContato(this.contato!));
+
+        this.exbindoFormularioContato = false;
+
+        frm.reset();
+    }
+
+    clonarContato(contato: Contato): Contato {
+        return new Contato(contato.id, contato.nome, contato.email, contato.telefone);
+    }
+
 }
