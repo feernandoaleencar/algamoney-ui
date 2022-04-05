@@ -16,6 +16,8 @@ import {InputMaskModule} from "primeng/inputmask";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PanelModule} from "primeng/panel";
 import {ChartModule} from "primeng/chart";
+import {DialogModule} from "primeng/dialog";
+import {RippleModule} from "primeng/ripple";
 
 @NgModule({
     declarations: [
@@ -40,7 +42,9 @@ import {ChartModule} from "primeng/chart";
         InputNumberModule,
         InputMaskModule,
         PanelModule,
-        ChartModule
+        ChartModule,
+        DialogModule,
+        RippleModule,
     ],
     exports: [
         CommonModule,
@@ -61,7 +65,9 @@ import {ChartModule} from "primeng/chart";
         InputNumberModule,
         InputMaskModule,
         PanelModule,
-        ChartModule
+        ChartModule,
+        DialogModule,
+        RippleModule,
     ]
 })
 export class SharedModule {
