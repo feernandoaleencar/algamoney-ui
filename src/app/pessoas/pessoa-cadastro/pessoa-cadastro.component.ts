@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Pessoa} from "../../core/model";
+import {Contato, Pessoa} from "../../core/model";
 import {NgForm} from "@angular/forms";
 import {PessoaService} from "../pessoa.service";
 import {ErrorHandlerService} from "../../core/error-handler.service";
@@ -16,6 +16,7 @@ export class PessoaCadastroComponent implements OnInit {
 
     pessoa = new Pessoa();
     exbindoFormularioContato: boolean = false;
+    contato?: Contato;
 
     constructor(
         private pessoaService: PessoaService,
@@ -90,5 +91,7 @@ export class PessoaCadastroComponent implements OnInit {
 
     prepararNovoContato() {
         this.exbindoFormularioContato = true;
+
+        this.contato = new Contato();
     }
 }
