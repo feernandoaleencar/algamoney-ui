@@ -117,4 +117,8 @@ export class PessoaCadastroComponent implements OnInit {
 
         this.contatoIndex = id;
     }
+
+    removerContato(index: number) {
+        this.pessoa.contatos.splice(index, 1);
+    }
 }
