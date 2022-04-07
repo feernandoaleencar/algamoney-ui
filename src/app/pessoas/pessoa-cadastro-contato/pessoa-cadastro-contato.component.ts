@@ -52,4 +52,8 @@ export class PessoaCadastroContatoComponent implements OnInit {
         this.contatos.splice(index, 1);
     }
 
+    get editando() {
+        return this.contato && this.contato.id;
+    }
+
 }

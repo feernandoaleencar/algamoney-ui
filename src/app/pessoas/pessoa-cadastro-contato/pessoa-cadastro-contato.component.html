@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<p-dialog header="Novo Contato" [(visible)]="exbindoFormularioContato" [modal]="true" *ngIf="contato">
+<p-dialog [header]="editando ? 'Editar Contato' : 'Novo Contato'" [(visible)]="exbindoFormularioContato" [modal]="true" *ngIf="contato">
     <form #frmContato="ngForm" (ngSubmit)="confirmarContato(frmContato)">
         <div class="p-col-12 p-fluid">
             <label>Nome</label>
