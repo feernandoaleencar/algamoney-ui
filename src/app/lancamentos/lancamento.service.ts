@@ -114,4 +114,8 @@ export class LancamentoService {
         return new HttpHeaders()
             .append('Authorization', 'Bearer ' + localStorage.getItem('token'))
     }
+
+    urlUploadAnexo(): string {
+        return `${this.lancamentosUrl}/anexo`;
+    }
 }
