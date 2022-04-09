@@ -18,6 +18,7 @@ import {PanelModule} from "primeng/panel";
 import {ChartModule} from "primeng/chart";
 import {DialogModule} from "primeng/dialog";
 import {RippleModule} from "primeng/ripple";
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import {RippleModule} from "primeng/ripple";
         ChartModule,
         DialogModule,
         RippleModule,
+        FileUploadModule,
     ],
     exports: [
         CommonModule,
@@ -68,6 +70,7 @@ import {RippleModule} from "primeng/ripple";
         ChartModule,
         DialogModule,
         RippleModule,
+        FileUploadModule,
     ]
 })
 export class SharedModule {

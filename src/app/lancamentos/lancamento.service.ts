@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {DatePipe} from '@angular/common';
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Lancamento} from "../core/model";
 import {environment} from "../../environments/environment";
 
@@ -108,5 +108,14 @@ export class LancamentoService {
                 lancamento.dataPagamento = new Date(lancamento.dataPagamento + 'T00:00');
             }
         }
+    }
+
+    uploadHeaders() {
+        return new HttpHeaders()
+            .append('Authorization', 'Bearer ' + localStorage.getItem('token'))
+    }
+
+    urlUploadAnexo(): string {
+        return `${this.lancamentosUrl}/anexo`;
     }
 }
