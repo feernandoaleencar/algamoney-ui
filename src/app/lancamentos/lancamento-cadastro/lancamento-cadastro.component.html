@@ -1,5 +1,5 @@
 <div class="container">
-    <form autocomplete="off" (ngSubmit)="salvar()"[formGroup]="formulario">
+    <form autocomplete="off" (ngSubmit)="salvar()" [formGroup]="formulario">
 
         <div class="p-grid">
             <div class="p-col-12">
@@ -29,8 +29,8 @@
 
             <div class="p-fluid p-col-6 p-md-3">
                 <label>{{ formulario.get('tipo')?.value === 'RECEITA' ? 'Recebimento' : 'Pagamento' }}</label>
-                <p-calendar  dateFormat="dd/mm/yy" name="dataPagamento"
-                             formControlName="dataPagamento">
+                <p-calendar dateFormat="dd/mm/yy" name="dataPagamento"
+                            formControlName="dataPagamento">
                 </p-calendar>
             </div>
 
@@ -93,7 +93,14 @@
             <div class="p-col-6 p-col-offset-6 p-md-2 p-fluid">
                 <p-fileUpload name="anexo" mode="basic" [auto]="true" [maxFileSize]="100000000"
                               chooseLabel="Anexar" accept="image/*,application/*" [headers]="uploadHeaders"
-                              [url]="urlUploadAnexo" ></p-fileUpload>
+                              [url]="urlUploadAnexo"
+                              (onUpload)="aoTerminarUploadAnexo($event)"></p-fileUpload>
+            </div>
+
+            <div class="p-col-12 p-fluid" dir="rtl"
+                 *ngIf="formulario.get('anexo')?.value">
+                <a target="_blank" pTooltip="Baixar anexo" tooltipPosition="top"
+                   [href]="formulario.get('urlAnexo')?.value">{{ nomeAnexo }}</a>
             </div>
 
             <div class="p-col-12">

@@ -75,7 +75,9 @@ export class LancamentoCadastroComponent implements OnInit {
                id: [null, Validators.required],
                nome: [],
             }),
-            observacao: []
+            observacao: [],
+            anexo: [],
+            urlAnexo: []
         });
     }
 
@@ -165,5 +167,24 @@ export class LancamentoCadastroComponent implements OnInit {
 
     get uploadHeaders() {
         return this.lancamentoService.uploadHeaders();
+    }
+
+    aoTerminarUploadAnexo(event: any) {
+        const anexo = event.originalEvent.body;
+
+        this.formulario.patchValue({
+            anexo: anexo.nome,
+            urlAnexo: (anexo.url as string).replace('\\', 'https://')
+        });
+    }
+
+    get nomeAnexo() {
+        const nome = this.formulario?.get('anexo')?.value;
+
+        if (nome) {
+            return nome.substring(nome.indexOf('_') + 1, nome.length);
+        }
+
+        return '';
     }
 }
