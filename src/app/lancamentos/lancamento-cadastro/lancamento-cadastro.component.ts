@@ -32,6 +32,7 @@ export class LancamentoCadastroComponent implements OnInit {
     data?: Date;
 
     formulario!: FormGroup;
+    uploadEmAndamento: boolean = false;
 
     constructor(
         private categoriaService: CategoriaService,
@@ -51,7 +52,7 @@ export class LancamentoCadastroComponent implements OnInit {
         this.title.setTitle('Novo Lancamento')
         const idLancamento = this.route.snapshot.params['id'];
 
-        if (idLancamento){
+        if (idLancamento) {
             this.editar(idLancamento);
         }
 
@@ -59,7 +60,7 @@ export class LancamentoCadastroComponent implements OnInit {
         this.carregarPessoas();
     }
 
-    configurarFormulario(){
+    configurarFormulario() {
         this.formulario = this.formBuilder.group({
             id: [],
             tipo: ['RECEITA', Validators.required],
@@ -68,24 +69,26 @@ export class LancamentoCadastroComponent implements OnInit {
             descricao: [null, [this.validarCampoObrigatorio, this.validarTamanhoMinimo(5)]],
             valor: [null, Validators.required],
             pessoa: this.formBuilder.group({
-               id: [null, Validators.required],
-               nome: [],
+                id: [null, Validators.required],
+                nome: [],
             }),
             categoria: this.formBuilder.group({
-               id: [null, Validators.required],
-               nome: [],
+                id: [null, Validators.required],
+                nome: [],
             }),
-            observacao: []
+            observacao: [],
+            anexo: [],
+            urlAnexo: []
         });
     }
 
-    validarCampoObrigatorio(input: FormControl){
-        return (input.value ? null : { obrigatorio: true })
+    validarCampoObrigatorio(input: FormControl) {
+        return (input.value ? null : {obrigatorio: true})
     }
 
-    validarTamanhoMinimo(valor: number){
-        return(input: FormControl) => {
-            return (!input.value || input.value.length >= valor) ? null : { tamanhoMinimo: { tamanho: valor } }
+    validarTamanhoMinimo(valor: number) {
+        return (input: FormControl) => {
+            return (!input.value || input.value.length >= valor) ? null : {tamanhoMinimo: {tamanho: valor}}
         };
     }
 
@@ -105,8 +108,8 @@ export class LancamentoCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    salvar(){
-        if (this.editando){
+    salvar() {
+        if (this.editando) {
             this.atualizarLancamento();
         } else {
             this.adicionarLancamento();
@@ -118,17 +121,17 @@ export class LancamentoCadastroComponent implements OnInit {
         this.lancamentoService.Adicionar(this.formulario.value)
             .then(lancamento => {
                 this.messageService.add({severity: 'success', detail: 'Lançamento adicionado com sucesso!'});
-               // lancamentoForm.reset();
-               // this.lancamento = new Lancamento();
-               this.router.navigate(['/lancamentos', lancamento.id])
+                // lancamentoForm.reset();
+                // this.lancamento = new Lancamento();
+                this.router.navigate(['/lancamentos', lancamento.id])
             })
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    atualizarLancamento(){
+    atualizarLancamento() {
 
         this.lancamentoService.atualizar(this.formulario.value)
-            .then((lancamento:Lancamento) => {
+            .then((lancamento: Lancamento) => {
                 this.formulario.patchValue(lancamento)
                 this.messageService.add({severity: 'success', detail: 'Lancamento atualizado com sucesso!'});
                 this.atualizarTitle();
@@ -146,7 +149,7 @@ export class LancamentoCadastroComponent implements OnInit {
             .catch(erro => this.errorHandlerService.handle(erro));
     }
 
-    get editando(){
+    get editando() {
         return Boolean(this.formulario.get('id')!.value);
     }
 
@@ -155,15 +158,54 @@ export class LancamentoCadastroComponent implements OnInit {
         this.router.navigate(['/lancamentos/novo'])
     }
 
-    atualizarTitle(){
+    atualizarTitle() {
         this.title.setTitle(`Edição de lançamento: ${this.formulario.get('descricao')?.value}`)
     }
 
     get urlUploadAnexo() {
         return this.lancamentoService.urlUploadAnexo();
+
     }
 
     get uploadHeaders() {
         return this.lancamentoService.uploadHeaders();
+    }
+
+    antesUploadAnexo() {
+        this.uploadEmAndamento = true;
+    }
+
+    aoTerminarUploadAnexo(event: any) {
+        const anexo = event.originalEvent.body;
+
+        this.formulario.patchValue({
+            anexo: anexo.nome,
+            urlAnexo: (anexo.url as string).replace('\\', 'https://')
+        });
+
+        this.uploadEmAndamento = false;
+    }
+
+    get nomeAnexo() {
+        const nome = this.formulario?.get('anexo')?.value;
+
+        if (nome) {
+            return nome.substring(nome.indexOf('_') + 1, nome.length);
+        }
+
+        return '';
+    }
+
+    erroUpload(event: any) {
+        this.messageService.add({severity: 'error', detail: 'Erro ao tentar enviar anexo!'});
+
+        this.uploadEmAndamento = false;
+    }
+
+    removerAnexo() {
+        this.formulario.patchValue({
+            anexo: null,
+            urlAnexo: null
+        });
     }
 }
