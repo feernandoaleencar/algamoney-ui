@@ -32,6 +32,7 @@ export class LancamentoCadastroComponent implements OnInit {
     data?: Date;
 
     formulario!: FormGroup;
+    uploadEmAndamento: boolean = false;
 
     constructor(
         private categoriaService: CategoriaService,
@@ -163,10 +164,15 @@ export class LancamentoCadastroComponent implements OnInit {
 
     get urlUploadAnexo() {
         return this.lancamentoService.urlUploadAnexo();
+
     }
 
     get uploadHeaders() {
         return this.lancamentoService.uploadHeaders();
+    }
+
+    antesUploadAnexo() {
+        this.uploadEmAndamento = true;
     }
 
     aoTerminarUploadAnexo(event: any) {
@@ -176,6 +182,8 @@ export class LancamentoCadastroComponent implements OnInit {
             anexo: anexo.nome,
             urlAnexo: (anexo.url as string).replace('\\', 'https://')
         });
+
+        this.uploadEmAndamento = false;
     }
 
     get nomeAnexo() {
@@ -190,5 +198,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     erroUpload(event: any) {
         this.messageService.add({severity: 'error', detail: 'Erro ao tentar enviar anexo!'});
+
+        this.uploadEmAndamento = false;
     }
 }

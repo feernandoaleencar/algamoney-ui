@@ -19,6 +19,7 @@ import {ChartModule} from "primeng/chart";
 import {DialogModule} from "primeng/dialog";
 import {RippleModule} from "primeng/ripple";
 import {FileUploadModule} from "primeng/fileupload";
+import {ProgressSpinnerModule} from "primeng/progressspinner";
 
 @NgModule({
     declarations: [
@@ -47,6 +48,7 @@ import {FileUploadModule} from "primeng/fileupload";
         DialogModule,
         RippleModule,
         FileUploadModule,
+        ProgressSpinnerModule
     ],
     exports: [
         CommonModule,
@@ -71,6 +73,7 @@ import {FileUploadModule} from "primeng/fileupload";
         DialogModule,
         RippleModule,
         FileUploadModule,
+        ProgressSpinnerModule
     ]
 })
 export class SharedModule {
