@@ -90,14 +90,15 @@
                           formControlName="observacao"></textarea>
             </div>
 
-            <div class="p-col-6 p-col-offset-6 p-md-2 p-fluid">
+            <div class="p-col-12 p-col-offset-12 p-md-2 p-md-offset-10 p-fluid" [style]="{'text-align': 'end'}">
                 <p-fileUpload name="anexo" mode="basic" [auto]="true" [maxFileSize]="100000000"
                               chooseLabel="Anexar" accept="image/*,application/*" [headers]="uploadHeaders"
                               [url]="urlUploadAnexo"
                               (onBeforeUpload)="antesUploadAnexo()"
                               (onUpload)="aoTerminarUploadAnexo($event)"
                               (onError)="erroUpload($event)"
-                              [hidden]="uploadEmAndamento"></p-fileUpload>
+                              [hidden]="uploadEmAndamento">
+                </p-fileUpload>
 
                 <p-progressSpinner [hidden]="!uploadEmAndamento"
                                    [style]="{ width: '25px', height: '25px' }"></p-progressSpinner>
