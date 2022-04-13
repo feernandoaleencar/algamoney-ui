@@ -208,4 +208,8 @@ export class LancamentoCadastroComponent implements OnInit {
             urlAnexo: null
         });
     }
+
+    configurarURLcomProtocolo() {
+        return `https://${this.formulario.get('urlAnexo')?.value}`;
+    }
 }
