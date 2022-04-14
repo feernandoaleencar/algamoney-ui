@@ -180,7 +180,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
         this.formulario.patchValue({
             anexo: anexo.nome,
-            urlAnexo: (anexo.url as string).replace('\\', 'https://')
+            urlAnexo: anexo.url
         });
 
         this.uploadEmAndamento = false;
