@@ -16,6 +16,8 @@ export class PessoaCadastroComponent implements OnInit {
 
     pessoa = new Pessoa();
     estados: any[] = [];
+    municipios: any[] = [];
+    estadoSelecionado?: number;
 
     constructor(
         private pessoaService: PessoaService,
@@ -94,6 +96,14 @@ export class PessoaCadastroComponent implements OnInit {
         this.pessoaService.listarEstados()
             .then(lista => {
                 this.estados = lista.map(uf => ({ label: uf.nome + " - " + uf.uf, value: uf.codigo}))
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
+    }
+
+    carregarMunicipios() {
+        this.pessoaService.pesquisarMunicipios(this.estadoSelecionado!)
+            .then(lista => {
+                this.municipios = lista.map(mun => ({ label: mun.nome, value: mun.codigo}))
             })
             .catch(erro => this.errorHandlerService.handle(erro));
     }

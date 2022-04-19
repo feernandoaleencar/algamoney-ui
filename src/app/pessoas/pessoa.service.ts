@@ -102,8 +102,9 @@ export class PessoaService {
     }
 
     pesquisarMunicipios(estadoId: number): Promise<Municipio[]> {
-        return this.http.get(`${this.municipioUrl}/${estadoId}`)
-            .toPromise()
-            .then((response: any) => response['content'])
+
+        // @ts-ignore
+        return this.http.get(`${this.municipioUrl}?estado=${estadoId}`)
+            .toPromise();
     }
 }
