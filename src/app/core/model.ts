@@ -12,8 +12,20 @@ export class Endereco {
     complemento?: string;
     bairro?: string;
     cep?: string;
-    cidade?: string;
-    estado?: string;
+    municipio = new Municipio();
+}
+
+export class Estado {
+    codigo?: number;
+    uf?: string;
+    nome?: string;
+}
+
+export class Municipio {
+    codigo?: number;
+    uf?: string;
+    nome?: string;
+    estado = new Estado();
 }
 
 export class Categoria {
