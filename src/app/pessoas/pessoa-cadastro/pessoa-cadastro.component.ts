@@ -15,6 +15,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class PessoaCadastroComponent implements OnInit {
 
     pessoa = new Pessoa();
+    estados: any[] = [];
 
     constructor(
         private pessoaService: PessoaService,
@@ -29,6 +30,8 @@ export class PessoaCadastroComponent implements OnInit {
         this.title.setTitle('Nova Pessoa');
 
         const idPessoa = this.route.snapshot.params['id'];
+
+        this.carregarEstados();
 
         if (idPessoa){
             this.editar(idPessoa);
@@ -85,5 +88,13 @@ export class PessoaCadastroComponent implements OnInit {
 
     atualizarTitle(){
         this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`)
+    }
+
+    carregarEstados(){
+        this.pessoaService.listarEstados()
+            .then(lista => {
+                this.estados = lista.map(uf => ({ label: uf.nome + " - " + uf.uf, value: uf.codigo}))
+            })
+            .catch(erro => this.errorHandlerService.handle(erro));
     }
 }

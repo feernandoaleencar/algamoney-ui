@@ -95,9 +95,10 @@ export class PessoaService {
     }
 
     listarEstados(): Promise<Estado[]> {
+
+        // @ts-ignore
         return this.http.get(this.estadoUrl)
-            .toPromise()
-            .then((response: any) => response['content'])
+            .toPromise();
     }
 
     pesquisarMunicipios(estadoId: number): Promise<Municipio[]> {

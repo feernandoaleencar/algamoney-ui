@@ -75,25 +75,22 @@
             </div>
 
             <div class="p-fluid p-col-12 p-md-6">
-                <label>Cidade</label>
-                <input type="text" pInputText
-                       name="cidade"
-                       #cidade="ngModel"
-                       [(ngModel)]="pessoa.endereco.cidade" required>
-
-                <app-message [control]="cidade" error="required"
-                             text="Informe a cidade"></app-message>
+                <label>Estado</label>
+                <p-dropdown placeholder="Selecione"
+                            [filter]="true"
+                            [options]="estados">
+                </p-dropdown>
             </div>
 
             <div class="p-fluid p-col-12 p-md-6">
-                <label>Estado</label>
+                <label>Município</label>
                 <input type="text" pInputText
-                       name="estado"
-                       #estado="ngModel"
-                       [(ngModel)]="pessoa.endereco.estado" required>
+                       name="municipio"
+                       #municipio="ngModel"
+                       [(ngModel)]="pessoa.endereco.municipio" required>
 
-                <app-message [control]="estado" error="required"
-                             text="Informe o estado"></app-message>
+                <app-message [control]="municipio" error="required"
+                             text="Informe o município"></app-message>
             </div>
 
             <div class="p-col-12">
