@@ -80,19 +80,32 @@
                             [filter]="true"
                             [options]="estados"
                             [(ngModel)]="estadoSelecionado" name="estadoSelecionado"
+                            #estado="ngModel"
+                            [required]="true"
                             (onChange)="carregarMunicipios()">
                 </p-dropdown>
+
+                <app-message [control]="estado.control" error="required"
+                             text="Informe o estado"></app-message>
             </div>
 
             <div class="p-fluid p-col-12 p-md-6">
                 <label>Município</label>
                 <p-dropdown *ngIf="municipios.length == 0"
+                            [disabled]="true"
                             placeholder="Informe um estado">
                 </p-dropdown>
                 <p-dropdown *ngIf="municipios.length > 0"
                             placeholder="Selecione um município"
                             [filter]="true"
-                            [options]="municipios">
+                            [options]="municipios"
+                            [(ngModel)]="pessoa.endereco.municipio.codigoIbge"
+                            name="municipio" #municipio="ngModel"
+                            [required]="true"
+                            [disabled]="!estadoSelecionado">
+
+                    <app-message [control]="municipio.control" error="required"
+                                 text="Informe o município"></app-message>
                 </p-dropdown>
             </div>
 

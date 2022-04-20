@@ -22,7 +22,7 @@ export class Estado {
 }
 
 export class Municipio {
-    codigo?: number;
+    codigoIbge?: number;
     uf?: string;
     nome?: string;
     estado = new Estado();
