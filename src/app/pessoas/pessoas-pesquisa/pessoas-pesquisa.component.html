@@ -34,7 +34,7 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Nome</th>
-                        <th>Cidade</th>
+                        <th>Município</th>
                         <th>Estado</th>
                         <th>Status</th>
                         <th col-acoes-header>Ações</th>
@@ -48,12 +48,12 @@
                             {{ item.nome }}
                         </td>
                         <td>
-                            <span class="p-column-title">Cidade</span>
-                            {{ item.endereco.cidade }}
+                            <span class="p-column-title">Município</span>
+                            {{ item.endereco.municipio?.nome }}
                         </td>
                         <td>
                             <span class="p-column-title">Estado</span>
-                            {{ item.endereco.estado }}
+                            {{ item.endereco.municipio?.estado.nome + " - " + item.endereco.municipio?.estado.uf  }}
                         </td>
                         <td>
                             <span class="p-column-title">Status</span>
