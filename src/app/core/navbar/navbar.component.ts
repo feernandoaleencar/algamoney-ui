@@ -37,4 +37,7 @@ export class NavbarComponent implements OnInit {
             .catch(erro => this.errorHandler.handle(erro));
     }
 
+    exibirMenu(){
+        this.exibindoMenu = !this.exibindoMenu
+    }
 }
